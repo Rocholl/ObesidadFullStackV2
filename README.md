@@ -1,4 +1,5 @@
-![enter image description here](https://img.shields.io/badge/Author-Carlos_Rocholl-y-Sergio_Peñate-cyan)
+![enter image description here](https://img.shields.io/badge/Author-Carlos_Rocholl-cyan)
+![enter image description here](https://img.shields.io/badge/Author-Sergio_Peñate-cyan)
 
 # Proyecto Obesidad
 
