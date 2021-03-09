@@ -1,3 +1,5 @@
+![enter image description here](https://img.shields.io/badge/Author-Carlos_Rocholl-y-Sergio_Peñate-cyan)
+
 # Proyecto Obesidad
 
  <p align="center"> <img src="https://i2.wp.com/www3.gobiernodecanarias.org/medusa/edublog/ieselrincon/wp-content/uploads/sites/137/2019/10/cropped-sin-titulo-4.png?fit=512%2C512" width="350"/></p> 
