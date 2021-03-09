@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, MenuController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 import { ViewChild, ElementRef } from '@angular/core';
 import { CentrosService } from '../services/centros.service';
 import { Centro } from '../Models/Centro';
@@ -9,7 +9,6 @@ import { MapArray } from '../Models/mapArray';
 import { MunicipiosService } from '../services/municipios.service';
 import { HealthsExtend } from '../Models/healthExtend';
 import { HealthsExtendService } from '../services/health-extend.service';
-import { Observable } from 'rxjs';
 
 declare var google: any;
 
@@ -33,28 +32,48 @@ export class MapPage implements OnInit {
   mapMarkers1: any[] = [];
 
   municipio1;
+<<<<<<< HEAD
   markerbool: boolean = false;
   markerbool1: boolean = false;
   ticks: any;
+=======
+  markerbool: boolean = true;
+  markerbool1: boolean = true;
+>>>>>>> 93adf64... Develop
   constructor(
     private menuCtrl: MenuController,
     private centroService: CentrosService,
     private healthService: HealthsService,
     private municipioService: MunicipiosService,
+<<<<<<< HEAD
     private healthExtendService: HealthsExtendService,
     private alertController: AlertController) {
+=======
+    private healthExtendService: HealthsExtendService) {
+
+>>>>>>> 93adf64... Develop
 
     this.getAllCentros();
   }
+<<<<<<< HEAD
+=======
+  
+  toggleMenu() {
+    this.menuCtrl.toggle();
+  }
+>>>>>>> 93adf64... Develop
 
   ionViewWillEnter() {
     this.showMap();
   }
 
+<<<<<<< HEAD
   toggleMenu() {
     this.menuCtrl.toggle();
   }
 
+=======
+>>>>>>> 93adf64... Develop
   ngOnInit() {
 
   }
@@ -133,10 +152,15 @@ export class MapPage implements OnInit {
       this.centros = centros;
 
 
+<<<<<<< HEAD
     }, err => {
       this.presentAlert("Error");
     });
 
+=======
+    })
+    
+>>>>>>> 93adf64... Develop
   }
 
   ionViewDidEnter() {
@@ -207,17 +231,7 @@ export class MapPage implements OnInit {
     }
   }
 
-  async presentAlert(message: string) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Error',
-      subHeader: message,
-      message: 'Try again.',
-      buttons: ['OK']
-    });
 
-    await alert.present();
-  }
 
 
   showMap() {
