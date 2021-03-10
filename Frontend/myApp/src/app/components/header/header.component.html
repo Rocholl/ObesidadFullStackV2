@@ -1,12 +1,15 @@
 <ion-menu side="start" menuId="main-menu" contentId="main">
   <ion-header>
     <ion-toolbar color="primary">
-      <ion-title>Start Menu</ion-title>
+      <ion-title>Menú</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-button expand="full" href="/login">
+      <ion-button *ngIf="isLogged"  href="/user-page" expand="full" color="primary">
+        Profesor
+      </ion-button>
+      <ion-button *ngIf="!isLogged" expand="full" href="/login">
         Login
       </ion-button>
       <ion-button expand="full" (click)="help()">
@@ -15,43 +18,9 @@
       <ion-button expand="full" >
         Terminos de uso
       </ion-button>
-      <ion-button *ngIf="!isLogged"  href="/user-page" expand="full" color="secondary">
-        Profesor
-      </ion-button>
-      <ion-button *ngIf="!isLogged" (click)="logout()" href="/login" expand="full" color="secondary">
+      <ion-button *ngIf="isLogged" (click)="logout()" href="/login" expand="full" color="secondary" class="topDown">
         Cerrar sesion
       </ion-button>
-    </ion-list>
-  </ion-content>
-</ion-menu>
-
-
-
-<ion-menu side="end" type="push" contentId="main">
-  <ion-header>
-    <ion-toolbar color="danger">
-      <ion-title>End Menu</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-    
-      <ion-button expand="full"  (click)="help()">
-        Login
-      </ion-button>
-      <ion-button expand="full" href="/help-page">
-        Ayuda
-      </ion-button>
-      <ion-button expand="full" >
-        Terminos de uso
-      </ion-button>
-      <ion-button *ngIf="!isLogged"  href="/user-page" expand="full" color="secondary">
-        Profesor
-      </ion-button>
-      <ion-button *ngIf="!isLogged" (click)="logout()" href="/login" expand="full" color="secondary">
-        Cerrar sesion
-      </ion-button>
-
     </ion-list>
   </ion-content>
 </ion-menu>

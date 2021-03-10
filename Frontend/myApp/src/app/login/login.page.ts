@@ -32,9 +32,11 @@ export class LoginPage implements OnInit {
   
       }
   }
+
   toggleMenu() {
     this.menuCtrl.toggle();
   }
+  
   login(form){
     let user: Usuario = {
       id: null,
@@ -51,6 +53,7 @@ export class LoginPage implements OnInit {
         return;
       }
       this.storage.set("user",res.usuario);
+      this.storage.set("token", res.token);
       this.router.navigateByUrl('/user-page');
       form.reset();
     }, err => {

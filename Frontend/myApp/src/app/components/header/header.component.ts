@@ -18,9 +18,11 @@ export class HeaderComponent implements OnInit {
      this.isLogged= false;
    }
   }
+
   logout(){
     this.auth.logout();
     }
+    
     help(){
       window.open("http://localhost:8080/Ayuda%20ObesidadFullStack.html", '_system');
     }

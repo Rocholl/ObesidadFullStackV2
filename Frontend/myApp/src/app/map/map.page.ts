@@ -13,15 +13,11 @@ import { Observable } from 'rxjs';
 
 declare var google: any;
 
-
 @Component({
   selector: 'app-map',
   templateUrl: './map.page.html',
   styleUrls: ['./map.page.scss'],
 })
-
-
-
 
 export class MapPage implements OnInit {
 
@@ -37,8 +33,8 @@ export class MapPage implements OnInit {
   mapMarkers1: any[] = [];
 
   municipio1;
-  markerbool: boolean = true;
-  markerbool1: boolean = true;
+  markerbool: boolean = false;
+  markerbool1: boolean = false;
   ticks: any;
   constructor(
     private menuCtrl: MenuController,
@@ -46,18 +42,23 @@ export class MapPage implements OnInit {
     private healthService: HealthsService,
     private municipioService: MunicipiosService,
     private healthExtendService: HealthsExtendService,
-    private alertController:AlertController) {
-
+    private alertController: AlertController) {
 
     this.getAllCentros();
-
   }
+
   ionViewWillEnter() {
     this.showMap();
   }
-  ngOnInit() {
-   
+
+  toggleMenu() {
+    this.menuCtrl.toggle();
   }
+
+  ngOnInit() {
+
+  }
+
   toggleMap1() {
     console.log(this.centros);
     if (this.markerbool) {
@@ -71,27 +72,27 @@ export class MapPage implements OnInit {
       this.showMap();
     }
   }
-  toggleMap() {
-  if(this.markerbool1){
-this.markerbool1=false;
-  }else{
-    this.markerbool1= true;
-  }
-  
-  this.showMap();
 
+  toggleMap() {
+    if (this.markerbool1) {
+      this.markerbool1 = true;
+    } else {
+      this.markerbool1 = false;
+    }
+    this.showMap();
   }
+
   getAllHealth() {
-   
+
     console.log(this.centros)
     for (let centro of this.centros) {
-      let marker= new MapArray;
+      let marker = new MapArray;
       console.log(centro.lat)
       marker.nombre = centro.nombre;
-   
+
       marker.lat = centro.lat;
       marker.long = centro.long;
-      marker.peso =centro.peso;
+      marker.peso = centro.peso;
       marker.percent_Grasa = centro.percent_Grasa;
       marker.percent_Hidratacion = centro.percent_Hidratacion;
 
@@ -108,39 +109,40 @@ this.markerbool1=false;
       marker.actividad_Fisica = centro.actividad_Fisica;
 
       marker.perimetro_Abdominal = centro.perimetro_Abdominal;
-      if(centro.percent_Grasa> 27 && centro.percent_Grasa < 50){
+      if (centro.percent_Grasa > 27 && centro.percent_Grasa < 50) {
         marker.type = "alto";
       }
-      if(centro.percent_Grasa> 21  && centro.percent_Grasa < 27 ){
+      if (centro.percent_Grasa > 21 && centro.percent_Grasa < 27) {
         marker.type = "medio";
       }
-      if(centro.percent_Grasa> 5 && centro.percent_Grasa < 21){
+      if (centro.percent_Grasa > 5 && centro.percent_Grasa < 21) {
         marker.type = "bajo";
       }
-     if(centro.percent_Grasa=null){
-      marker.type = "Default";
-     }
-     console.log(marker)
-     this.mapMarkers.push(marker)
+      if (centro.percent_Grasa = null) {
+        marker.type = "Default";
+      }
+      console.log(marker)
+      this.mapMarkers.push(marker)
 
     }
 
   }
 
- async getAllCentros() {
+  async getAllCentros() {
     await this.healthExtendService.centersAverage().subscribe(centros => {
       this.centros = centros;
-    
+
 
     }, err => {
       this.presentAlert("Error");
     });
-    
-  }
-  ionViewDidEnter() {
-    this.getAllHealth()
 
   }
+
+  ionViewDidEnter() {
+    this.getAllHealth()
+  }
+
   addMarkersToMap() {
     const iconBase = "https://maps.google.com/mapfiles/kml/paddle/";
     const icons: Record<string, any> = {
@@ -170,18 +172,16 @@ this.markerbool1=false;
         title: marker.nombre,
         peso: marker.peso,
         percent_Grasa: marker.percent_Grasa,
-        altura:marker.altura,
+        altura: marker.altura,
         latitude: marker.lat,
         longitude: marker.long,
         icon: icons[marker.type].icon
       });
-
       mapMarker.setMap(this.map);
       this.addInfoWindowToMarker(mapMarker);
-
     }
-
   }
+
   addInfoWindowToMarker(marker) {
     let infoWindowContent = '<div id="content">' +
       '<h2 id="firstHeading" style=":black;" class"firstHeading">' + marker.title + '</h2>' +
@@ -200,6 +200,7 @@ this.markerbool1=false;
     });
     this.infoWindows.push(infoWindow);
   }
+
   closeAllInfoWindows() {
     for (let window of this.infoWindows) {
       window.close();
@@ -238,9 +239,9 @@ this.markerbool1=false;
     });
     this.addMarkersToMap();
 
-    if(this.markerbool1){
-    lasPalmasPolygon.setMap(this.map);
-  }
+    if (this.markerbool1) {
+      lasPalmasPolygon.setMap(this.map);
+    }
 
   }
   Menu() {

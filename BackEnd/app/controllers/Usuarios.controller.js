@@ -18,8 +18,8 @@ exports.create = (req, res) => {
     Usuario.create({
         idUsuarios: req.body.idUsuarios,
         username: req.body.username,
-        password	:password,
-        nombre: req.body.apellidos,
+        password:   password,
+        nombre: req.body.nombre,
         apellidos: req.body.apellidos,
     
         idCentro: Number.parseInt(req.body.idCentro)

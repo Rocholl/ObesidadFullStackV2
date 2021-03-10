@@ -1,24 +1,23 @@
 <ion-header>
-  <ion-toolbar color="primary">
-      <ion-title>Map</ion-title>
+    <ion-toolbar color="primary">
+        <ion-title>Mapa</ion-title>
 
-      <ion-buttons slot="start">
-          <ion-button color="secondary" expand="block" fill="clear" shape="round">
-              <ion-icon slot="start" name="menu"></ion-icon>
-          </ion-button>
-      </ion-buttons>
+        <ion-buttons slot="start">
+            <ion-button (click)="toggleMenu()" color="secondary" expand="block" fill="clear" shape="round">
+                <ion-icon slot="start" name="menu"></ion-icon>
+            </ion-button>
+        </ion-buttons>
 
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 
-<ion-item>
-<ion-label>Centros</ion-label>
-<ion-toggle slot="start" [(ngModel)]="markerbool" name="apple" color="secondary" (click)="toggleMap1()" checked></ion-toggle>
+<ion-item color="primary">
+    <ion-icon slot="start" name="school-outline" [color]="markerbool ? 'secondary':'tertiary'"></ion-icon>
+    <ion-toggle  [(ngModel)]="markerbool" name="apple" color="secondary" (click)="toggleMap1()"></ion-toggle>
 
-    <ion-label class="ion-text-right">Municipio</ion-label>
-    <ion-toggle   name="apple" color="secondary" (click)="toggleMap()" checked></ion-toggle>
-    </ion-item>
+    <ion-icon slot="end" name="earth-outline" [color]="markerbool1 ? 'secondary':'tertiary'"></ion-icon>
+    <ion-toggle [(ngModel)]="markerbool1" slot="end" name="apple" color="secondary" (click)="toggleMap()"></ion-toggle>
+</ion-item>
 <ion-content>
-    
-<div #map id="map"></div>
+    <div #map id="map"></div>
 </ion-content>

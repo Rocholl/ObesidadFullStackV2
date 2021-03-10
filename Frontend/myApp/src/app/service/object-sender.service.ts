@@ -20,4 +20,5 @@ export class ObjectSenderService {
   sendListSource(list:any[]){
     this.listSource.next(list);
   }
+  
 }

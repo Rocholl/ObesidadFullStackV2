@@ -35,14 +35,10 @@ module.exports =
                 } else {
                     res.status(401).json({ msg: "Password doesnt match" })
                 }
-
             }
-
         }).catch(err => {
             res.status(500).json(err)
         })
-
-
     },
     isAuthenticated(req, res, next) {
         // check header or url parameters or post parameters for token

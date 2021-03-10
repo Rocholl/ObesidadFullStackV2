@@ -16,12 +16,6 @@ module.exports = (sequelize, Sequelize) => {
         num_lista: {
             type: Sequelize.INTEGER,
         },
-    
-     
-     
-
-      
-
       
     }, { timestamps: false });
     Health.associate = function(models) {

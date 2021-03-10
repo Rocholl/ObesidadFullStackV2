@@ -6,7 +6,7 @@ module.exports = {
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
     host: process.env.DB_HOST,
-    dialect: 'postgres',
+    dialect: 'mysql',
     pool: { max: 5, min: 0, acquire: 30000, idle: 10000 },
     seederStorage: "json",
     seederStoragePath: "sequelizeSeeds.json",
@@ -21,14 +21,14 @@ module.exports = {
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
     host: process.env.DB_HOST,
-    dialect: 'postgres', pool: { max: 5, min: 0, acquire: 30000, idle: 10000 }
+    dialect: 'mysql', pool: { max: 5, min: 0, acquire: 30000, idle: 10000 }
   },
   production: {
     username: process.env.MYSQL_USER,
     password: process.env.MYSQL_PASSWORD,
     database: process.env.MYSQL_DATABASE,
     host: process.env.DB_HOST,
-    dialect: 'postgres',
+    dialect: 'mysql',
     pool: { max: 5, min: 0, acquire: 30000, idle: 10000 }
   }
 
