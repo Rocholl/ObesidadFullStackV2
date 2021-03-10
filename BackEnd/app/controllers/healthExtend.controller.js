@@ -444,7 +444,11 @@ exports.SequelizeOnlyAverage = async (req, res) => {
                 [Sequelize.fn('AVG', Sequelize.col('masa_Muscular')), 'masa_Muscular'],
                 [Sequelize.fn('AVG', Sequelize.col('peso_Oseo')), 'peso_Oseo'],
                 [Sequelize.fn('AVG', Sequelize.col('kilocalorias')), 'kilocalorias'],
+                [Sequelize.fn('AVG', Sequelize.col('masa_Viseral')), 'masa_Viseral'],
+                [Sequelize.fn('AVG', Sequelize.col('perimetro_Abdominal')), 'perimetro_Abdominal'],
+                [Sequelize.fn('AVG', Sequelize.col('actividad_Fisica')), 'actividad_Fisica'],
                 [Sequelize.fn('AVG', Sequelize.col('altura')), 'altura'],
+               
             ]
         },
         group: ["nombre", "lat", "long"],
