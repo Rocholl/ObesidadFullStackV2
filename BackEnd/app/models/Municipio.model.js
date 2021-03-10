@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         isla: {
-            type: Sequelize.ENUM('Las palmas')            
+            type: Sequelize.STRING           
         }
 
       

@@ -25,7 +25,7 @@ exports.create = (req, res) => {
         idCentro: req.body.idCentro,
         nombre: req.body.nombre,
         codigo_Postal: req.body.codigo_Postal,
-        idMunicipios: req.body.idMunicipios,
+        idDistrito: req.body.idDistrito,
         lat: parseFloat(req.body.lat),
         long: parseFloat(req.body.long)
 

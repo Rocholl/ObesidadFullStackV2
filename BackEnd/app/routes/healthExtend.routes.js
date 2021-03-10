@@ -8,14 +8,14 @@ module.exports = app => {
 
     // Retrieve all healths
     router.get("/", Health.findAll);
-    router.get("/avgSex",Health.healthExtendBySexAverages);
-    router.get("/avg",Health.Averages);
-    router.get("/centeraverage/:id",Health.CenterAverage);
-    router.get("/maparray/",Health.CentersAverage);
-    router.get("/maparray2/",Health.SequelizeOnlyAverage);
-    router.get("/pipebysex/:sex",Health.healthExtendBySexAverages);
+    router.get("/maparray/",Health.SequelizeOnlyAverage);
+    router.get("/centeraverage/:id",Health.SequelizeOnlyAverageByCentro);
+    router.get("/pipebysex/:sex",Health.SequelizeOnlyAverageBySex);
     router.get("/pipebyage/:age",Health.healthExtendByAgeAverages);
     router.get("/pipebyphisicalactivity/:ph",Health.healthExtendByPhisicalAverages);
+    router.get("/avg",Health.CentersAverage);
+    router.get("/pipebydistrict/:id",Health.findHealthbyDistrito);
+
 
 
 

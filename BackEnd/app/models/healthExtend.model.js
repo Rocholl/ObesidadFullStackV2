@@ -53,7 +53,9 @@ module.exports = (sequelize, Sequelize) => {
       
     }, { timestamps: false });
     healthExtend.associate = function(models) {
-        // associations can be defined here
+        healthExtend.belongsTo(models.health,{
+            foreignKey: 'idHealth'
+        })
        
      
     };

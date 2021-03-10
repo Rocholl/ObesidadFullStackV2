@@ -23,7 +23,9 @@ module.exports = (sequelize, Sequelize) => {
 
             foreignKey: 'idHealth'
         })
-       
+        Health.belongsTo(models.centros,{as:'centros',
+        foreignKey: 'idCentro'
+    });
      
     };
         //  

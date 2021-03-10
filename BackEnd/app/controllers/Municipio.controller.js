@@ -1,5 +1,5 @@
 const db = require("../models");
-const Municipio = db.municipio;
+const Municipio = db.municipios;
 const Op = db.Sequelize.Op;
 const { QueryTypes } = require('sequelize');
 const { Sequelize } = require("../models");
@@ -16,7 +16,7 @@ exports.create = (req, res) => {
 
     // Create a usuario
     const municipio = {
-        idMunicipio: req.body.idMunicipio,
+        idMunicipios: req.body.idMunicipios,
         nombre: req.body.nombre,
         isla: req.body.isla
         

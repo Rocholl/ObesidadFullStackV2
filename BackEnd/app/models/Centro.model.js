@@ -25,7 +25,7 @@ module.exports = (sequelize, Sequelize) => {
         });
         Centro.associate = function(models) {
             Centro.hasMany(models.usuarios, {
-           as:"fk_usu_Id_Centro",
+           
            foreignKey:{
             name: "idCentro"
           }}) ,
@@ -33,9 +33,13 @@ module.exports = (sequelize, Sequelize) => {
             
               Centro.hasMany(models.health, {
                 
-                as: 'Centro',
+                as:'centros',
                 foreignKey: "idCentro"
               })
+              Centro.belongsTo(models.distrito,{
+                foreignKey: 'idDistrito'
+            })
         };
+       
     return Centro;
 };

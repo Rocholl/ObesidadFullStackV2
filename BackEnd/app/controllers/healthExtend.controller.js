@@ -4,6 +4,8 @@ const HealthsExtend = db.healthExtend;
 const Op = db.Sequelize.Op;
 const Centro = db.centros;
 const Health = db.health;
+const Distrito = db.distrito;
+
 const { QueryTypes } = require('sequelize');
 const { Sequelize } = require("../models");
 
@@ -83,191 +85,335 @@ exports.findAll = (req, res) => {
             });
         });
 };
-exports.findHealthbyMunicipio = (req, res) => {
-    db.sequelize.query(`SELECT * from healthsExtend INNER JOIN centros   
-    ON healths.idCentros = centros.idCentro 
- HAVING centros.idMunicipios =` + req.params.id).then((result) => {
-        res.json(result);
-    }).catch((err) => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving Healths."
-        });
-    });
+exports.findHealthbyDistrito = async (req, res) => {
+    let countInfra = await HealthsExtend.count({
+        where: {
 
-}
-
-exports.healthExtendBySexAverages = async (req, res) => {
-
-    let sex = req.params.sex;
-
-    db.sequelize.query(`SELECT AVG(healthextends.peso) as peso,AVG(healthextends.percent_Grasa) as percent_Grasa 
-    ,AVG(healthextends.percent_Hidratacion) as percent_Hidratacion ,AVG(healthextends.peso_Muscular) as peso_Muscular 
-    ,AVG(healthextends.masa_Muscular) as masa_Muscular ,AVG(healthextends.peso_Oseo) as peso_Oseo 
-    ,AVG(healthextends.kilocalorias) as kilocalorias, AVG(healthextends.edad_Metabolica) as edad_Metabolica 
-    ,AVG(healthextends.altura) as altura ,AVG(healthextends.masa_Viseral) as masa_Viseral 
-    ,AVG(healthextends.perimetro_Abdominal) as perimetro_Abdominal ,AVG(healthextends.actividad_Fisica) as actividad_Fisica 
-      from healthextends where idHealth in(SELECT idHealths FROM health  WHERE sexo = "` + sex + `")`,{type: Sequelize.QueryTypes.SELECT}).then(data => {
-
-        if (!data) {
-            res.status(400).send({
-                message: "No Centro found with that id"
-            })
+            percent_Grasa: { [Op.between]: [0, 11] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+           
+            include: {
+                model: Centro,
+                attributes: [],
+                as: "centros",
+                include: {
+                    model: Distrito,
+                    attributes: [],
+                    where:{
+                        idDistrito: req.params.id
+                    }
+                }
+            }
         }
-
-        res.json(data);
-    }).catch(err => {
-        console.log(err.message);
-
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving Centro with id"
-        });
-        return;
     })
+    let countNormo = await HealthsExtend.count({
+        where: {
 
+            percent_Grasa: { [Op.between]: [12, 22] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+           
+            include: {
+                model: Centro,
+                attributes: [],
+                as: "centros",
+                include: {
+                    model: Distrito,
+                    attributes: [],
+                    where:{
+                        idDistrito: req.params.id
+                    }
+                }
+            }
+        }
+    })
+    let countSobre = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [23, 30] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+           
+            include: {
+                model: Centro,
+                attributes: [],
+                as: "centros",
+                include: {
+                    model: Distrito,
+                    attributes: [],
+                    where:{
+                        idDistrito: req.params.id
+                    }
+                }
+            }
+        }
+    })
+    let countObeso = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [31, 100] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+           
+            include: {
+                model: Centro,
+                attributes: [],
+                as: "centros",
+                include: {
+                    model: Distrito,
+                    attributes: [],
+                    where:{
+                        idDistrito: req.params.id
+                    }
+                }
+            }
+        }
+        }
+    )
+    let data= {infrapeso: countInfra,normopeso:countNormo,sobrepeso:countSobre,obesidad:countObeso}
+    await res.json(data);
 }
+
 
 exports.healthExtendByAgeAverages = async (req, res) => {
+    let countInfra = await HealthsExtend.count({
+        where: {
 
-    let age = req.params.age;
-
-    db.sequelize.query(`SELECT AVG(healthextends.peso) as peso,AVG(healthextends.percent_Grasa) as percent_Grasa 
-    ,AVG(healthextends.percent_Hidratacion) as percent_Hidratacion ,AVG(healthextends.peso_Muscular) as peso_Muscular 
-    ,AVG(healthextends.masa_Muscular) as masa_Muscular ,AVG(healthextends.peso_Oseo) as peso_Oseo 
-    ,AVG(healthextends.kilocalorias) as kilocalorias, AVG(healthextends.edad_Metabolica) as edad_Metabolica 
-    ,AVG(healthextends.altura) as altura ,AVG(healthextends.masa_Viseral) as masa_Viseral 
-    ,AVG(healthextends.perimetro_Abdominal) as perimetro_Abdominal ,AVG(healthextends.actividad_Fisica) as actividad_Fisica 
-      from healthextends where idHealth in(SELECT idHealths FROM health  WHERE edad = ` + age + `)`,{type: Sequelize.QueryTypes.SELECT}).then(data => {
-
-        if (!data) {
-            res.status(400).send({
-                message: "No Centro found with that id"
-            })
+            percent_Grasa: { [Op.between]: [0, 11] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+            where: {
+                edad: req.params.edad
+            }
         }
-
-        res.json(data);
-    }).catch(err => {
-        console.log(err.message);
-
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving Centro with id"
-        });
-        return;
     })
+    let countNormo = await HealthsExtend.count({
+        where: {
 
+            percent_Grasa: { [Op.between]: [12, 22] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+            where: {
+                edad: req.params.edad
+            }
+        }
+    })
+    let countSobre = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [23, 30] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+            where: {
+                edad: req.params.edad
+            }
+        }
+    })
+    let countObeso = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [31, 100] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+            where: {
+                edad: req.params.edad
+            }
+        }
+    })
+    let data= {infrapeso: countInfra,normopeso:countNormo,sobrepeso:countSobre,obesidad:countObeso}
+    await res.json(data);
 }
 exports.healthExtendByPhisicalAverages = async (req, res) => {
+    let countInfra = await HealthsExtend.count({
+        where: {
 
-    let ph = req.params.ph;
-
-    db.sequelize.query(`SELECT AVG(healthextends.peso) as peso,AVG(healthextends.percent_Grasa) as percent_Grasa 
-    ,AVG(healthextends.percent_Hidratacion) as percent_Hidratacion ,AVG(healthextends.peso_Muscular) as peso_Muscular 
-    ,AVG(healthextends.masa_Muscular) as masa_Muscular ,AVG(healthextends.peso_Oseo) as peso_Oseo 
-    ,AVG(healthextends.kilocalorias) as kilocalorias, AVG(healthextends.edad_Metabolica) as edad_Metabolica 
-    ,AVG(healthextends.altura) as altura ,AVG(healthextends.masa_Viseral) as masa_Viseral 
-    ,AVG(healthextends.perimetro_Abdominal) as perimetro_Abdominal ,AVG(healthextends.actividad_Fisica) as actividad_Fisica 
-      from healthextends where idHealth in(SELECT idHealths FROM health  WHERE actividad_Fisica = ` + ph + `)`,{type: Sequelize.QueryTypes.SELECT}).then(data => {
-
-        if (!data) {
-            res.status(400).send({
-                message: "No Centro found with that id"
-            })
+            actividad_Fisica:req.params.ph
         }
-
-        res.json(data);
-    }).catch(err => {
-        console.log(err.message);
-
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving Centro with id"
-        });
-        return;
     })
+    let countNormo = await HealthsExtend.count({
+        where: {
 
-}
-exports.CenterAverage = async (req, res) => {
-
-    let id = req.params.id;
-    db.sequelize.query(`SELECT AVG(healthextends.peso) as peso,AVG(healthextends.percent_Grasa) as percent_Grasa 
-    ,AVG(healthextends.percent_Hidratacion) as percent_Hidratacion ,AVG(healthextends.peso_Muscular) as peso_Muscular 
-    ,AVG(healthextends.masa_Muscular) as masa_Muscular ,AVG(healthextends.peso_Oseo) as peso_Oseo 
-    ,AVG(healthextends.kilocalorias) as kilocalorias, AVG(healthextends.edad_Metabolica) as edad_Metabolica 
-    ,AVG(healthextends.altura) as altura ,AVG(healthextends.masa_Viseral) as masa_Viseral 
-    ,AVG(healthextends.perimetro_Abdominal) as perimetro_Abdominal ,AVG(healthextends.actividad_Fisica) as actividad_Fisica 
-    FROM healthextends INNER JOIN health ON health.idHealths= healthextends.idHealth WHERE health.idCentro= `+id+" LIMIT 1",{type: Sequelize.QueryTypes.SELECT}).then(data => {
-        res.json(data);
-    }).catch(err => {
-        console.log(err.message);
-
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving Centro with id"
-        });
-        return;
+            actividad_Fisica:req.params.ph
+        }
     })
-}
-exports.CenterAverageReport= (id1) => {
+    let countSobre = await HealthsExtend.count({
+        where: {
 
-    let id = id1;
-    db.sequelize.query(`SELECT AVG(healthextends.peso) as peso,AVG(healthextends.percent_Grasa) as percent_Grasa 
-    ,AVG(healthextends.percent_Hidratacion) as percent_Hidratacion ,AVG(healthextends.peso_Muscular) as peso_Muscular 
-    ,AVG(healthextends.masa_Muscular) as masa_Muscular ,AVG(healthextends.peso_Oseo) as peso_Oseo 
-    ,AVG(healthextends.kilocalorias) as kilocalorias, AVG(healthextends.edad_Metabolica) as edad_Metabolica 
-    ,AVG(healthextends.altura) as altura ,AVG(healthextends.masa_Viseral) as masa_Viseral 
-    ,AVG(healthextends.perimetro_Abdominal) as perimetro_Abdominal ,AVG(healthextends.actividad_Fisica) as actividad_Fisica 
-    FROM healthextends INNER JOIN health ON health.idHealths= healthextends.idHealth WHERE health.idCentro= `+id+" LIMIT 1",{type: Sequelize.QueryTypes.SELECT}).then(data => {
-        return data;
-    }).catch(err => {
-        console.log(err.message);
-
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving Centro with id"
-        });
-        return;
-    });
-}
-exports.Averages = async (req, res) => {
-
-
-    db.sequelize.query(`SELECT AVG(healthextends.peso) as peso,AVG(healthextends.percent_Grasa) as percent_Grasa ,AVG(healthextends.percent_Hidratacion) as percent_Hidratacion ,AVG(healthextends.peso_Muscular) as peso_Muscular 
-    ,AVG(healthextends.masa_Muscular) as masa_Muscular ,AVG(healthextends.peso_Oseo) as peso_Oseo ,AVG(healthextends.kilocalorias) as kilocalorias,
-    AVG(healthextends.edad_Metabolica) as edad_Metabolica ,AVG(healthextends.altura) as altura ,AVG(healthextends.masa_Viseral) as masa_Viseral ,AVG(healthextends.perimetro_Abdominal) as perimetro_Abdominal ,AVG(healthextends.actividad_Fisica)  as actividad_Fisica
-      from healthextends where idHealth in (SELECT idHealths FROM health ) `,{type: Sequelize.QueryTypes.SELECT}).then(data => {
-
-
-
-        res.json(data) ;
-    }).catch(err => {
-        console.log(err.message);
-
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving Centro with id"
-        });
-        return;
+            actividad_Fisica:req.params.ph
+        }
     })
+    let countObeso = await HealthsExtend.count({
+        where: {
 
-
-
+            actividad_Fisica:req.params.ph
+        }
+    })
+    let data= {infrapeso: countInfra,normopeso:countNormo,sobrepeso:countSobre,obesidad:countObeso}
+    await res.json(data);
+ 
 }
+
+
 
 exports.CentersAverage = async (req, res) => {
-    db.sequelize.query(`SELECT centros.nombre,centros.lat,centros.long, AVG(healthextends.peso) as peso,AVG(healthextends.percent_Grasa) as percent_Grasa ,AVG(healthextends.percent_Hidratacion) as percent_Hidratacion ,AVG(healthextends.peso_Muscular) aspeso_Muscular 
-    ,AVG(healthextends.masa_Muscular) as masa_Muscular ,AVG(healthextends.peso_Oseo) as peso_Oseo ,AVG(healthextends.kilocalorias) as kilocalorias,
-    AVG(healthextends.edad_Metabolica) as edad_Metabolica ,AVG(healthextends.altura) as altura ,AVG(healthextends.masa_Viseral) as masa_Viseral ,AVG(healthextends.perimetro_Abdominal) as perimetro_Abdominal ,AVG(healthextends.actividad_Fisica)  as actividad_Fisica
-      from healthextends,health,centros where healthextends.idHealth=health.idHealths AND health.idCentro=centros.idCentro GROUP BY centros.nombre`,{type: Sequelize.QueryTypes.SELECT}).then(data => {
+    let countInfra = await HealthsExtend.count({
+        where: {
 
-
-
-        res.send(data);
-    }).catch(err => {
-        console.log(err.message);
-
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving Centro with id"
-        });
-        return;
+            percent_Grasa: { [Op.between]: [0, 11] }
+        }
     })
+    let countNormo = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [12, 22] }
+        }
+    })
+    let countSobre = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [23, 30] }
+        }
+    })
+    let countObeso = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [31, 100] }
+        }
+    })
+    let data= {infrapeso: countInfra,normopeso:countNormo,sobrepeso:countSobre,obesidad:countObeso}
+    await res.json(data);
+}
+exports.SequelizeOnlyAverageByCentro = async (req, res) => {
+    let countInfra = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [0, 11] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+            where: {
+                idCentro: req.params.id
+            }
+        }
+    })
+    let countNormo = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [12, 22] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+            where: {
+                idCentro: req.params.id
+            }
+        }
+    })
+    let countSobre = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [23, 30] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+            where: {
+                idCentro: req.params.id
+            }
+        }
+    })
+    let countObeso = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [31, 100] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+            where: {
+                idCentro: req.params.id
+            }
+        }
+    })
+    let data= {infrapeso: countInfra,normopeso:countNormo,sobrepeso:countSobre,obesidad:countObeso}
+    await res.json(data);
 
 }
+exports.SequelizeOnlyAverageBySex = async (req, res) => {
+    let countInfra = await HealthsExtend.count({
+        where: {
 
+            percent_Grasa: { [Op.between]: [0, 11] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+            where: {
+                sexo: req.params.sex
+            }
+        }
+    })
+    let countNormo = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [12, 22] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+            where: {
+                sexo: req.params.sex
+            }
+        }
+    })
+    let countSobre = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [23, 30] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+            where: {
+                sexo: req.params.sex
+            }
+        }
+    })
+    let countObeso = await HealthsExtend.count({
+        where: {
+
+            percent_Grasa: { [Op.between]: [31, 100] }
+        },
+        include: {
+            model: Health,
+            attributes: [],
+            where: {
+                sexo: req.params.sex
+            }
+        }
+    })
+    let data= {infrapeso: countInfra,normopeso:countNormo,sobrepeso:countSobre,obesidad:countObeso}
+    await res.json(data);
+    
+}
 exports.SequelizeOnlyAverage = async (req, res) => {
     HealthsExtend.findAll({
         raw: true,
@@ -290,13 +436,22 @@ exports.SequelizeOnlyAverage = async (req, res) => {
                 "idHealth"
             ], include: [
                 [Sequelize.col('health->centros.nombre'), 'nombre'],
-                [Sequelize.fn('AVG', Sequelize.col('peso')), 'AverageWeight']
+                [Sequelize.col('health->centros.lat'), 'lat'],
+                [Sequelize.col('health->centros.long'), 'long'],
+                [Sequelize.fn('AVG', Sequelize.col('percent_Grasa')), 'percent_Grasa'],
+                [Sequelize.fn('AVG', Sequelize.col('percent_Hidratacion')), 'percent_Hidratacion'],
+                [Sequelize.fn('AVG', Sequelize.col('peso_Muscular')), 'peso_Muscular'],
+                [Sequelize.fn('AVG', Sequelize.col('masa_Muscular')), 'masa_Muscular'],
+                [Sequelize.fn('AVG', Sequelize.col('peso_Oseo')), 'peso_Oseo'],
+                [Sequelize.fn('AVG', Sequelize.col('kilocalorias')), 'kilocalorias'],
+                [Sequelize.fn('AVG', Sequelize.col('altura')), 'altura'],
             ]
-        }, 
-        group: "nombre",
+        },
+        group: ["nombre", "lat", "long"],
         include: [{
             model: Health,
             attributes: [],
+
             include: [{
                 model: Centro,
                 attributes: [],
