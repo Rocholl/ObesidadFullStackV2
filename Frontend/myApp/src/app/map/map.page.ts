@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { ViewChild, ElementRef } from '@angular/core';
 import { CentrosService } from '../services/centros.service';
 import { Centro } from '../Models/Centro';
@@ -32,48 +32,28 @@ export class MapPage implements OnInit {
   mapMarkers1: any[] = [];
 
   municipio1;
-<<<<<<< HEAD
   markerbool: boolean = false;
   markerbool1: boolean = false;
   ticks: any;
-=======
-  markerbool: boolean = true;
-  markerbool1: boolean = true;
->>>>>>> 93adf64... Develop
   constructor(
     private menuCtrl: MenuController,
     private centroService: CentrosService,
     private healthService: HealthsService,
     private municipioService: MunicipiosService,
-<<<<<<< HEAD
     private healthExtendService: HealthsExtendService,
     private alertController: AlertController) {
-=======
-    private healthExtendService: HealthsExtendService) {
-
->>>>>>> 93adf64... Develop
 
     this.getAllCentros();
   }
-<<<<<<< HEAD
-=======
-  
-  toggleMenu() {
-    this.menuCtrl.toggle();
-  }
->>>>>>> 93adf64... Develop
 
   ionViewWillEnter() {
     this.showMap();
   }
 
-<<<<<<< HEAD
   toggleMenu() {
     this.menuCtrl.toggle();
   }
 
-=======
->>>>>>> 93adf64... Develop
   ngOnInit() {
 
   }
@@ -152,15 +132,10 @@ export class MapPage implements OnInit {
       this.centros = centros;
 
 
-<<<<<<< HEAD
     }, err => {
       this.presentAlert("Error");
     });
 
-=======
-    })
-    
->>>>>>> 93adf64... Develop
   }
 
   ionViewDidEnter() {

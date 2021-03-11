@@ -46,10 +46,6 @@ export class HealthsExtendService {
 
     bodyEncoded.append("idHealth", heath.idHealth.toString());
 
-
-
-
-
     let body = bodyEncoded.toString();
 
     return this.http.post(apiUrl, body, httpOptions);

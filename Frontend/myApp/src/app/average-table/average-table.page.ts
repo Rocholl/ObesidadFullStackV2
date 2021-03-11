@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, MenuController } from '@ionic/angular';
-import { average } from '../Models/average';
 import { Centro } from '../Models/Centro';
 import { AuthService } from '../services/auth.service';
 import { CentrosService } from '../services/centros.service';
+import { DataResponse } from '../services/data.response';
 import { HealthsExtendService } from '../services/health-extend.service';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-average-table',
@@ -12,7 +13,7 @@ import { HealthsExtendService } from '../services/health-extend.service';
   styleUrls: ['./average-table.page.scss'],
 })
 export class AverageTablePage implements OnInit {
-  average: average;
+  dataResponse: DataResponse;
   isLogged: boolean;
   selectBool: boolean;
   selectBool2: boolean;
@@ -28,11 +29,11 @@ export class AverageTablePage implements OnInit {
 
   toggleMenu() {
     this.menuCtrl.toggle();
-    console.log(this.average);
+    console.log(this.dataResponse);
   }
   ngOnInit() {
     this.healthExtendService.averages().subscribe((res) => {
-      this.average = res[0];
+      this.dataResponse = res[0];
 
     })
     if (this.auth.isLoggedIn()) {
@@ -69,7 +70,7 @@ export class AverageTablePage implements OnInit {
     if (this.selectParam == "General") {
       this.presentLoading()
       this.healthExtendService.averages().subscribe((res) => {
-        this.average = res[0];
+        this.dataResponse = res[0];
         
         this.selectBool3= false;
         this.selectBool2= false;
@@ -109,31 +110,33 @@ this.selectBool= false;
     this.healthExtendService.centerAverage(this.centrosSelected.idCentro).subscribe(data => {
       console.log(data);
 
-      this.average = data[0];
+      this.dataResponse = data[0];
       console.log(this.centrosSelected.idCentro)
     }, err => {
       this.presentAlert("no se ha podido cargar por falta de conexion");
     }
     )
   }
+
   selectService2() {
     this.presentLoading();
     this.healthExtendService.pipebysex(this.sex).subscribe(data => {
 
 
-      this.average = data[0];
+      this.dataResponse = data[0];
 
     }, err => {
       this.presentAlert("no se ha podido cargar por falta de conexion");
     }
     )
   }
+
   selectService3(){
     this.presentLoading();
     this.healthExtendService.pipebyage(this.age).subscribe(data => {
 
 
-      this.average = data[0];
+      this.dataResponse = data[0];
 
     }, err => {
       this.presentAlert("no se ha podido cargar por falta de conexion");
@@ -156,7 +159,7 @@ this.selectBool= false;
     this.healthExtendService.pipebyphisicalActivity(this.phisicalActivity).subscribe(data => {
       console.log(data);
 
-      this.average = data[0];
+      this.dataResponse = data[0];
       console.log(this.centrosSelected.idCentro)
     }, err => {
       this.presentAlert("no se ha podido cargar por falta de conexion");
