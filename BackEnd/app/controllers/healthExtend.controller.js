@@ -35,15 +35,10 @@ exports.create = (req, res) => {
         altura: req.body.altura,
         edad_Metabolica: req.body.edad_Metabolica,
 
-
-
         masa_Viseral: req.body.masa_Viseral,
 
         perimetro_Abdominal: req.body.perimetro_Abdominal,
         actividad_Fisica: req.body.actividad_Fisica,
-
-
-
 
     };
 
@@ -63,13 +58,6 @@ exports.create = (req, res) => {
 
 
 }
-
-
-
-
-
-
-
 
 
 // Retrieve all usuarios from the database.
