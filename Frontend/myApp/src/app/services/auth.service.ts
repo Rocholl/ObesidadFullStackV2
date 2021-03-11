@@ -5,13 +5,13 @@ import { Usuario } from '../Models/Usuario';
 import { AuthResponse } from './auth.response';
 import { tap } from  'rxjs/operators';
 import { Storage } from '@ionic/storage';
-const apiUrl = 'http://localhost:8080/api/usuario/signin/';
+const apiUrl = 'https://obesidadbackend.azurewebsites.net/api/usuario/signin/';
 @Injectable({
   providedIn: 'root'
 })
 
 export class AuthService {
-  AUTH_SERVER_ADDRESS:  string  =  'http://localhost:8080';
+  AUTH_SERVER_ADDRESS:  string  =  'https://obesidadbackend.azurewebsites.net';
 
   constructor(private  httpClient:  HttpClient, private  storage:  Storage) { }
 

@@ -74,6 +74,7 @@ export class UserClassStudentsPage implements OnInit {
     }, 1000)
 
   }
+  
   ionViewDidEnter() {
     if (this.currentClass != null) {
       this.addHealth();

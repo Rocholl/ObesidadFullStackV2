@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { average } from '../Models/average';
 import { HealthsExtend } from '../Models/healthExtend';
-const apiUrl = 'http://localhost:8080/api/healthextend/';
+const apiUrl = 'https://obesidadbackend.azurewebsites.net/api/healthextend/';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',

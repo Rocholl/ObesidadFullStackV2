@@ -10,6 +10,7 @@ import { AuthService } from '../services/auth.service';
 export class HomePage {
   isLogged:boolean;
   constructor(private menuCtrl: MenuController,private auth:AuthService) {}
+  
   toggleMenu() {
     this.menuCtrl.toggle();
   }
@@ -21,8 +22,6 @@ export class HomePage {
       this.isLogged= false;
 
     }
-
-
   }
   
   }

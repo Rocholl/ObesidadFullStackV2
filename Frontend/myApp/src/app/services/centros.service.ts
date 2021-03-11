@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Centro } from '../Models/Centro';
-const apiUrl = 'http://localhost:8080/api/centro/';
+const apiUrl = 'https://obesidadbackend.azurewebsites.net/api/centro/';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
