@@ -9,6 +9,7 @@ import { MapArray } from '../Models/mapArray';
 import { MunicipiosService } from '../services/municipios.service';
 import { HealthsExtend } from '../Models/healthExtend';
 import { HealthsExtendService } from '../services/health-extend.service';
+import { Observable } from 'rxjs';
 
 declare var google: any;
 
@@ -206,7 +207,17 @@ export class MapPage implements OnInit {
     }
   }
 
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Error',
+      subHeader: message,
+      message: 'Try again.',
+      buttons: ['OK']
+    });
 
+    await alert.present();
+  }
 
 
   showMap() {
