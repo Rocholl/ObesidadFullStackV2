@@ -16,10 +16,10 @@ export class HomePage {
   }
   ngOnInit() {
     if (this.auth.isLoggedIn()) {
-    this.isLogged= true;
+    this.isLogged= false;
 
     }else{
-      this.isLogged= false;
+      this.isLogged= true;
 
     }
   }

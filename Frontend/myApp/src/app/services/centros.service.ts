@@ -26,10 +26,12 @@ export class CentrosService {
       //   // catchError(this.handleError('getBicycles', []))
       // );
   };
+  
   getReport(id){
     console.log(id);
     return this.http.get(apiUrl+"reports/"+id);
   }
+
   getCentroId(id): Observable<Centro> {
   console.log(id)
     return this.http.get<Centro>(apiUrl+id);

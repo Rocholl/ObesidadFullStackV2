@@ -1,4 +1,4 @@
-<ion-menu side="start" menuId="main-menu" contentId="main">
+<ion-menu (ionWillOpen)="checkLogin()" side="start" menuId="main-menu" contentId="main">
   <ion-header>
     <ion-toolbar color="primary">
       <ion-title>Menú</ion-title>
@@ -6,19 +6,19 @@
   </ion-header>
   <ion-content>
     <ion-list>
-      <ion-button *ngIf="isLogged"  href="/user-page" expand="full" color="primary">
+      <ion-button *ngIf="isLogged"  href="/user-page" expand="full" color="primary" style="font-size: larger;">
         Profesor
       </ion-button>
-      <ion-button *ngIf="!isLogged" expand="full" href="/login">
+      <ion-button *ngIf="!isLogged" expand="full" href="/login" style="font-size: larger;">
         Login
       </ion-button>
-      <ion-button expand="full" (click)="help()">
+      <ion-button expand="full" (click)="help()" style="font-size: larger;">
         Ayuda
       </ion-button>
-      <ion-button expand="full" >
+      <ion-button expand="full" style="font-size: larger;">
         Terminos de uso
       </ion-button>
-      <ion-button *ngIf="isLogged" (click)="logout()" href="/login" expand="full" color="secondary" class="topDown">
+      <ion-button *ngIf="isLogged" (click)="logout()" expand="full" color="secondary" style="font-size: larger;">
         Cerrar sesion
       </ion-button>
     </ion-list>

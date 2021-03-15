@@ -1,67 +1,72 @@
 <ion-header>
   <ion-toolbar color="primary">
-      <ion-title>Datos</ion-title>
+    <ion-title>Datos</ion-title>
 
-      <ion-buttons slot="start">
-          <ion-button (click)="toggleMenu()" color="secondary" expand="block" fill="clear" shape="round">
-              <ion-icon slot="start" name="menu"></ion-icon>
-          </ion-button>
-      </ion-buttons>
-      <ion-select interface="action-sheet" color="primary" (ionChange)="select()" placeholder="Filtro: "  [(ngModel)]="selectParam" >
-        
-        <ion-select-option>General</ion-select-option>
-        <ion-select-option>Sexo</ion-select-option>
-        <ion-select-option>Edad</ion-select-option>
+    <ion-buttons slot="start">
+      <ion-button (click)="toggleMenu()" color="secondary" expand="block" fill="clear" shape="round">
+        <ion-icon slot="start" name="menu"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-select interface="action-sheet" color="primary" (ionChange)="select()" placeholder="Filtro: "
+      [(ngModel)]="selectParam">
 
-        <ion-select-option>Centro</ion-select-option>
+      <ion-select-option>General</ion-select-option>
+      <ion-select-option>Sexo</ion-select-option>
+      <ion-select-option>Edad</ion-select-option>
 
-        <ion-select-option>Actividad Fisica</ion-select-option>
+      <ion-select-option>Centro</ion-select-option>
+
+      <ion-select-option>Actividad Fisica</ion-select-option>
 
 
 
-        
-      </ion-select>
-      <ion-select interface="popover" color="primary" *ngIf="selectBool" (ionChange)="selectService()" placeholder="{{selectParam}}: "[(ngModel)]="centrosSelected">
-        <ion-select-option *ngFor="let curso1 of centrosSelect" [value]="curso1">{{curso1.nombre}}
-        </ion-select-option>
-      </ion-select>
-      <ion-select interface="popover" color="primary" *ngIf="selectBool2" (ionChange)="selectService2()" placeholder="{{selectParam}}: "[(ngModel)]="sex">
-        <ion-select-option value="M">Masculino</ion-select-option>
 
-        <ion-select-option value="F">Femenino</ion-select-option>
+    </ion-select>
+    <ion-select interface="popover" color="primary" *ngIf="selectBool" (ionChange)="selectService()"
+      placeholder="{{selectParam}}: " [(ngModel)]="centrosSelected">
+      <ion-select-option *ngFor="let curso1 of centrosSelect" [value]="curso1">{{curso1.nombre}}
+      </ion-select-option>
+    </ion-select>
+    <ion-select interface="popover" color="primary" *ngIf="selectBool2" (ionChange)="selectService2()"
+      placeholder="{{selectParam}}: " [(ngModel)]="sex">
+      <ion-select-option value="M">Masculino</ion-select-option>
 
-      </ion-select>
-      <ion-select interface="popover" color="primary" *ngIf="selectBool4" (ionChange)="selectService4()" placeholder="{{selectParam}}: "[(ngModel)]="phisicalActivity">
-        <ion-select-option value="1">1</ion-select-option>
-        <ion-select-option value="2">2</ion-select-option>
-        <ion-select-option value="3">3</ion-select-option>
-        <ion-select-option value="4">4</ion-select-option>
-        <ion-select-option value="5">5</ion-select-option>
-        <ion-select-option value="6">6</ion-select-option>
-        <ion-select-option value="7">7</ion-select-option>
+      <ion-select-option value="F">Femenino</ion-select-option>
 
-      </ion-select>
-      <ion-select interface="popover" color="primary" *ngIf="selectBool3" (ionChange)="selectService3()" placeholder="{{selectParam}}: "[(ngModel)]="age">
-        <ion-select-option value="8">8</ion-select-option>
-        <ion-select-option value="9">9</ion-select-option>
-        <ion-select-option value="10">10</ion-select-option>
-        <ion-select-option value="11">11</ion-select-option>
-        <ion-select-option value="12">12</ion-select-option>
-        <ion-select-option value="13">13</ion-select-option>
-        <ion-select-option value="14">14</ion-select-option>
-        <ion-select-option value="15">15</ion-select-option>
-        <ion-select-option value="16">16</ion-select-option>
-        <ion-select-option value="17">17</ion-select-option>
-        <ion-select-option value="18">18</ion-select-option>
-        <ion-select-option value="19">19</ion-select-option>
-        <ion-select-option value="20">20</ion-select-option>
-        <ion-select-option value="21">21</ion-select-option>
-      </ion-select>
-      
+    </ion-select>
+    <ion-select interface="popover" color="primary" *ngIf="selectBool4" (ionChange)="selectService4()"
+      placeholder="{{selectParam}}: " [(ngModel)]="phisicalActivity">
+      <ion-select-option value="1">1</ion-select-option>
+      <ion-select-option value="2">2</ion-select-option>
+      <ion-select-option value="3">3</ion-select-option>
+      <ion-select-option value="4">4</ion-select-option>
+      <ion-select-option value="5">5</ion-select-option>
+      <ion-select-option value="6">6</ion-select-option>
+      <ion-select-option value="7">7</ion-select-option>
+
+    </ion-select>
+    <ion-select interface="popover" color="primary" *ngIf="selectBool3" (ionChange)="selectService3()"
+      placeholder="{{selectParam}}: " [(ngModel)]="age">
+      <ion-select-option value="8">8</ion-select-option>
+      <ion-select-option value="9">9</ion-select-option>
+      <ion-select-option value="10">10</ion-select-option>
+      <ion-select-option value="11">11</ion-select-option>
+      <ion-select-option value="12">12</ion-select-option>
+      <ion-select-option value="13">13</ion-select-option>
+      <ion-select-option value="14">14</ion-select-option>
+      <ion-select-option value="15">15</ion-select-option>
+      <ion-select-option value="16">16</ion-select-option>
+      <ion-select-option value="17">17</ion-select-option>
+      <ion-select-option value="18">18</ion-select-option>
+      <ion-select-option value="19">19</ion-select-option>
+      <ion-select-option value="20">20</ion-select-option>
+      <ion-select-option value="21">21</ion-select-option>
+    </ion-select>
+
   </ion-toolbar>
 </ion-header>
-<ion-content >
-    <!-- <ion-list>
+<ion-content>
+  <!-- <ion-list>
         <ion-item>
           <ion-label>Peso</ion-label>
           <ion-badge slot="end">{{average.peso.toFixed(2)}} kg</ion-badge>
@@ -112,45 +117,48 @@
           </ion-item>
       </ion-list> -->
 
-      <ion-list>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-icon name="ellipse" slot="start" class="infrapeso"></ion-icon>
-            <ion-label>Infrapeso</ion-label>
-          </ion-item>
-          <ion-item-options side="end">
-            <ion-item slot="end">{{dataResponse.infrapeso}}%</ion-item>
-          </ion-item-options>
-        </ion-item-sliding>
-      
-        <ion-item-sliding>
-          <ion-item>
-            <ion-icon name="ellipse" slot="start" class="normopeso"></ion-icon>
-            <ion-label>Normopeso</ion-label>
-          </ion-item>
-          <ion-item-options side="end">
-            <ion-item slot="end">{{dataResponse.normopeso}}%</ion-item>
-          </ion-item-options>
-        </ion-item-sliding>
-        <ion-item-sliding>
-          <ion-item>
-            <ion-icon name="ellipse" slot="start" class="sobrepeso"></ion-icon>
-            <ion-label>Sobrepeso</ion-label>
-          </ion-item>
-          <ion-item-options side="end">
-            <ion-item slot="end">{{dataResponse.sobrepeso}}%</ion-item>
-          </ion-item-options>
-        </ion-item-sliding>
-      
-        <ion-item-sliding>
-          <ion-item>
-            <ion-icon name="ellipse" slot="start" class="obesidad"></ion-icon>
-            <ion-label>Obesidad</ion-label>
-          </ion-item>
-          <ion-item-options side="end">
-            <ion-item slot="end">{{dataResponse.obesidad}}%</ion-item>
-          </ion-item-options>
-        </ion-item-sliding>
-      </ion-list>
-      <br>
+  <ion-list>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+      <ion-item>
+        <ion-icon name="ellipse" slot="start" class="infrapeso"></ion-icon>
+        <ion-label>Infrapeso</ion-label>
+        <ion-item slot="end">{{dataResponse.infrapeso}}</ion-item>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="ellipse" slot="start" class="normopeso"></ion-icon>
+        <ion-label>Normopeso</ion-label>
+        <ion-item slot="end">{{dataResponse.normopeso}}</ion-item>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="ellipse" slot="start" class="sobrepeso"></ion-icon>
+        <ion-label>Sobrepeso</ion-label>
+        <ion-item slot="end">{{dataResponse.sobrepeso}}</ion-item>
+      </ion-item>
+
+      <ion-item>
+        <ion-icon name="ellipse" slot="start" class="obesidad"></ion-icon>
+        <ion-label>Obesidad</ion-label>
+        <ion-item slot="end">{{dataResponse.obesidad}}</ion-item>
+      </ion-item>
+
+      <br/>
+
+      <ion-item>
+        <ion-icon name="ellipse" slot="start"></ion-icon>
+        <ion-label>Muestra total:</ion-label>
+        <ion-item slot="end" *ngFor="let r of response">{{r}}</ion-item>
+      </ion-item>
+
+  </ion-list>
 </ion-content>

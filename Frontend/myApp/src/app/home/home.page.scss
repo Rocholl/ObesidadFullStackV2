@@ -26,6 +26,8 @@
   text-decoration: none;
 }
 
-.back-color{
-  --background: #ebe9e9;
+.background{
+  --background: url(../../assets/Wallpaper/canteras.jpg) 0 0/150% 100% no-repeat;
+  // filter: opacity(.9); 
 }
+

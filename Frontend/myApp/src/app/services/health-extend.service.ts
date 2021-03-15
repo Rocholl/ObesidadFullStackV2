@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { average } from '../Models/average';
+import { DataResponse } from '../services/data.response';
 import { HealthsExtend } from '../Models/healthExtend';
 const apiUrl = 'https://obesidadbackend.azurewebsites.net/api/healthextend/';
 const httpOptions = {
@@ -51,9 +51,9 @@ export class HealthsExtendService {
     return this.http.post(apiUrl, body, httpOptions);
 
   }
-  averages(): Observable<average> {
+  averages(): Observable<DataResponse> {
 
-    return this.http.get<average>(apiUrl + "avg");
+    return this.http.get<DataResponse>(apiUrl + "avg");
   }
   centerAverage(idCentro): Observable<HealthsExtend> {
     return this.http.get<HealthsExtend>(apiUrl + "centeraverage/" + idCentro);
@@ -61,13 +61,13 @@ export class HealthsExtendService {
   centersAverage(): Observable<any> {
     return this.http.get<any>(apiUrl + "maparray/");
   }
-  pipebysex(sex): Observable<any> {
+  pipebysex(sex): Observable<DataResponse> {
     return this.http.get<any>(apiUrl + "pipebysex/"+sex);
   }
-  pipebyage(age): Observable<any> {
+  pipebyage(age): Observable<DataResponse> {
     return this.http.get<any>(apiUrl + "pipebyage/"+age);
   }
-  pipebyphisicalActivity(ph):Observable<any>{
+  pipebyphisicalActivity(ph):Observable<DataResponse>{
     return this.http.get<any>(apiUrl + "pipebyphisicalactivity/"+ph);
   }
 }

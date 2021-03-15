@@ -6,6 +6,7 @@ import { CentrosService } from '../services/centros.service';
 import { DataResponse } from '../services/data.response';
 import { HealthsExtendService } from '../services/health-extend.service';
 import { from } from 'rxjs';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-average-table',
@@ -14,26 +15,28 @@ import { from } from 'rxjs';
 })
 export class AverageTablePage implements OnInit {
   dataResponse: DataResponse;
+  response: DataResponse[];
   isLogged: boolean;
   selectBool: boolean;
   selectBool2: boolean;
   selectBool3: boolean;
   selectBool4: boolean;
-  phisicalActivity:number;
+  phisicalActivity: number;
   age;
   sex;
   selectParam;
   centrosSelect: Centro[];
   centrosSelected: Centro;
-  constructor(public loadingController: LoadingController,private alertController:AlertController, private menuCtrl: MenuController, private auth: AuthService, private centroService: CentrosService, private healthExtendService: HealthsExtendService) { }
+  constructor(public loadingController: LoadingController, private alertController: AlertController, private menuCtrl: MenuController, private auth: AuthService, private centroService: CentrosService, private healthExtendService: HealthsExtendService, private dataService: DataService) { }
 
   toggleMenu() {
     this.menuCtrl.toggle();
     console.log(this.dataResponse);
   }
+
   ngOnInit() {
     this.healthExtendService.averages().subscribe((res) => {
-      this.dataResponse = res[0];
+      this.dataResponse = res;
 
     })
     if (this.auth.isLoggedIn()) {
@@ -44,17 +47,17 @@ export class AverageTablePage implements OnInit {
 
     }
 
-
   }
+
   select() {
     console.log(this.selectParam);
 
     if (this.selectParam == "Centro") {
       this.centroService.getCentros().subscribe(data => {
         this.centrosSelect = data;
-        this.selectBool3= false;
-        this.selectBool2= false;
-        this.selectBool4= false;
+        this.selectBool3 = false;
+        this.selectBool2 = false;
+        this.selectBool4 = false;
 
         this.selectBool = true;
 
@@ -62,35 +65,35 @@ export class AverageTablePage implements OnInit {
     }
     if (this.selectParam == "Sexo") {
       this.selectBool2 = true;
-      this.selectBool3= false;
-      this.selectBool= false;
-      this.selectBool4= false;
+      this.selectBool3 = false;
+      this.selectBool = false;
+      this.selectBool4 = false;
 
     }
     if (this.selectParam == "General") {
       this.presentLoading()
       this.healthExtendService.averages().subscribe((res) => {
         this.dataResponse = res[0];
-        
-        this.selectBool3= false;
-        this.selectBool2= false;
-        this.selectBool4= false;
+
+        this.selectBool3 = false;
+        this.selectBool2 = false;
+        this.selectBool4 = false;
 
         this.selectBool = false;
       })
     }
-    if(this.selectParam=="Edad"){
-      this.selectBool2= false;
-      this.selectBool= false;
-      this.selectBool3= true;
-      this.selectBool4= false;
+    if (this.selectParam == "Edad") {
+      this.selectBool2 = false;
+      this.selectBool = false;
+      this.selectBool3 = true;
+      this.selectBool4 = false;
 
     }
-    if(this.selectParam=="Actividad Fisica"){
-this.selectBool4=true;
-this.selectBool3= false;
-this.selectBool2= false;
-this.selectBool= false;
+    if (this.selectParam == "Actividad Fisica") {
+      this.selectBool4 = true;
+      this.selectBool3 = false;
+      this.selectBool2 = false;
+      this.selectBool = false;
     }
   }
   async presentLoading() {
@@ -123,7 +126,7 @@ this.selectBool= false;
     this.healthExtendService.pipebysex(this.sex).subscribe(data => {
 
 
-      this.dataResponse = data[0];
+      this.dataResponse = data;
 
     }, err => {
       this.presentAlert("no se ha podido cargar por falta de conexion");
@@ -131,18 +134,19 @@ this.selectBool= false;
     )
   }
 
-  selectService3(){
+  selectService3() {
     this.presentLoading();
     this.healthExtendService.pipebyage(this.age).subscribe(data => {
 
 
-      this.dataResponse = data[0];
+      this.dataResponse = data;
 
     }, err => {
       this.presentAlert("no se ha podido cargar por falta de conexion");
     }
     )
   }
+
   async presentAlert(message: string) {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -154,20 +158,29 @@ this.selectBool= false;
 
     await alert.present();
   }
+
   selectService4() {
     this.presentLoading();
     this.healthExtendService.pipebyphisicalActivity(this.phisicalActivity).subscribe(data => {
       console.log(data);
 
-      this.dataResponse = data[0];
+      this.dataResponse = data;
       console.log(this.centrosSelected.idCentro)
     }, err => {
       this.presentAlert("no se ha podido cargar por falta de conexion");
     }
     )
   }
+
   compareWith(o1: Centro, o2: Centro) {
     return o1 && o2 ? o1.idCentro === o2.idCentro : o1 === o2;
   }
-}
 
+  getAllData(){
+    console.log("getData");
+    this.dataService.getData().subscribe( dataService => {
+      console.log("inside");
+      this.dataService;
+    });
+  }
+}

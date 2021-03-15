@@ -49,6 +49,7 @@ export class AuthService {
 
   async logout() {
     await this.storage.remove("token");
+    await this.storage.remove("user");
   }
 
   async isLoggedIn() {

@@ -29,35 +29,41 @@
         <form [formGroup]="Tanita">
 
           <ion-item>
-            <ion-label position="floating">Peso</ion-label>
+            <br/>
+            <br/>
+            <ion-label position="floating" style="font-size: larger;"><b>Peso</b></ion-label>
             <ion-input formControlName="peso" type="number"></ion-input>
           </ion-item>
           <ion-item *ngIf="!Tanita.controls.peso.valid  && (Tanita.controls.peso.dirty || isSubmitted)">
             <p>Please enter a valid name.</p>
         </ion-item>
           <ion-item>
-            <ion-label position="floating">Porcentaje Grasa</ion-label>
+            <br/>
+            <ion-label position="floating" style="font-size: larger;"><b>Porcentaje Grasa</b></ion-label>
             <ion-input formControlName="percent_Grasa" type="number"></ion-input>
           </ion-item>
           <ion-item *ngIf="!Tanita.controls.percent_Grasa.valid  && (Tanita.controls.percent_Grasa.dirty || isSubmitted)">
             <p>Please enter a valid name.</p>
         </ion-item>
           <ion-item>
-            <ion-label position="floating">Porcentaje Hidratacion</ion-label>
+            <br/>
+            <ion-label position="floating" style="font-size: larger;"><b>Porcentaje Hidratacion</b></ion-label>
             <ion-input formControlName="percent_Hidratacion" type="number"></ion-input>
           </ion-item>
           <ion-item *ngIf="!Tanita.controls.percent_Hidratacion.valid  && (Tanita.controls.percent_Hidratacion.dirty || isSubmitted)">
             <p>Please enter a valid name.</p>
         </ion-item>
           <ion-item>
-            <ion-label position="floating">Peso Muscular</ion-label>
+            <br/>
+            <ion-label position="floating" style="font-size: larger;"><b>Peso Muscular</b></ion-label>
             <ion-input formControlName="peso_Muscular" type="number"></ion-input>
           </ion-item>
           <ion-item *ngIf="!Tanita.controls.peso_Muscular.valid  && (Tanita.controls.peso_Muscular.dirty || isSubmitted)">
             <p>Please enter a valid name.</p>
         </ion-item>
           <ion-item>
-            <ion-label position="floating">Masa Muscular</ion-label>
+            <br/>
+            <ion-label position="floating" style="font-size: larger;"><b>Masa Muscular</b></ion-label>
             <ion-input formControlName="masa_Muscular" type="number"></ion-input>
           </ion-item>
           <ion-item *ngIf="!Tanita.controls.masa_Muscular.valid  && (Tanita.controls.masa_Muscular.dirty || isSubmitted)">
@@ -75,28 +81,33 @@
         <form [formGroup]="Tanita2">
 
           <ion-item>
-            <ion-label position="floating">Peso Oseo</ion-label>
+            <br/>
+            <br/>
+            <ion-label position="floating" style="font-size: larger;"><b>Peso Oseo</b></ion-label>
             <ion-input formControlName="peso_Oseo" type="number"></ion-input>
           </ion-item>
           <ion-item *ngIf="!Tanita2.controls.peso_Oseo.valid  && (Tanita2.controls.peso_Oseo.dirty || isSubmitted)">
             <p>Please enter a valid name.</p>
         </ion-item>
           <ion-item>
-            <ion-label position="floating">Kilocalorias</ion-label>
+            <br/>
+            <ion-label position="floating" style="font-size: larger;"><b>Kilocalorias</b></ion-label>
             <ion-input formControlName="kilocalorias" type="number"></ion-input>
           </ion-item>
           <ion-item *ngIf="!Tanita2.controls.kilocalorias.valid  && (Tanita2.controls.kilocalorias.dirty || isSubmitted)">
             <p>Please enter a valid name.</p>
         </ion-item>
           <ion-item>
-            <ion-label position="floating">Edad Metabolica</ion-label>
+            <br/>
+            <ion-label position="floating" style="font-size: larger;"><b>Edad Metabolica</b></ion-label>
             <ion-input formControlName="edad_Metabolica" type="number"></ion-input>
           </ion-item>
           <ion-item *ngIf="!Tanita2.controls.edad_Metabolica.valid  && (Tanita2.controls.edad_Metabolica.dirty || isSubmitted)">
             <p>Please enter a valid name.</p>
         </ion-item>
           <ion-item>
-            <ion-label position="floating">Masa Viseral</ion-label>
+            <br/>
+            <ion-label position="floating" style="font-size: larger;"><b>Masa Viseral</b></ion-label>
             <ion-input formControlName="masa_Viseral" type="number"></ion-input>
           </ion-item>
           <ion-item *ngIf="!Tanita2.controls.masa_Viseral.valid  && (Tanita2.controls.masa_Viseral.dirty || isSubmitted)">
@@ -114,26 +125,32 @@
         <form [formGroup]="Manual">
 
           <ion-item>
-            <ion-label position="floating">Altura</ion-label>
+            <br/>
+            <br/>
+            <ion-label position="floating" style="font-size: larger;"><b>Altura</b></ion-label>
             <ion-input formControlName="altura" type="number"></ion-input>
           </ion-item>
           <ion-item *ngIf="!Manual.controls.altura.valid  && (Manual.controls.altura.dirty || isSubmitted)">
             <p>Please enter a valid name.</p>
         </ion-item>
           <ion-item>
-            <ion-label position="floating">Perimetro Abdominal</ion-label>
+            <br/>
+            <ion-label position="floating" style="font-size: larger;"><b>Perimetro Abdominal</b></ion-label>
             <ion-input formControlName="perimetro_Abdominal" type="number"></ion-input>
           </ion-item>
           <ion-item *ngIf="!Manual.controls.perimetro_Abdominal.valid  && (Manual.controls.perimetro_Abdominal.dirty || isSubmitted)">
             <p>Please enter a valid name.</p>
         </ion-item>
           <ion-item>
-            <ion-label position="floating">Actividad Fisica</ion-label>
+            <br/>
+            <ion-label position="floating" style="font-size: larger;"><b>Actividad Fisica</b></ion-label>
             <ion-input formControlName="actividad_Fisica" type="number"></ion-input>
           </ion-item>
           <ion-item *ngIf="!Manual.controls.actividad_Fisica.valid  && (Manual.controls.actividad_Fisica.dirty || isSubmitted)">
             <p>Please enter a valid name.</p>
         </ion-item>
+        <br/>
+        <br/>
         <ion-button expand="full" color="primary" (click)="submitForm()">Crear!</ion-button>
 
         </form>

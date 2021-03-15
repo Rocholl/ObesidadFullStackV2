@@ -19,8 +19,8 @@ import { Cursos } from '../Models/Cursos';
   styleUrls: ['./user-page.page.scss'],
 })
 export class UserPagePage implements OnInit {
-  user: any;
-  centro: Centro;
+  user: any = { nombre: "", apellidos: ""};
+  centro: Centro = { nombre: "",  idCentro: 0, codigo_postal: "", lat: 0, long: 0, idDistrito: 0};
   isMobile: Boolean;
   isLogged: boolean;
   constructor(private obj: ObjectSenderService, private router: Router, private centroService: CentrosService,
@@ -31,11 +31,6 @@ export class UserPagePage implements OnInit {
   }
 
   ngOnInit() {
-    if (this.auth.isLoggedIn) {
-      this.isLogged = true;
-    } else {
-      this.isLogged = false;
-    }
     if (this.platform.is('android')) {
       this.isMobile = true;
 
@@ -47,16 +42,20 @@ export class UserPagePage implements OnInit {
     this.storage.get("user").then(data => {
       this.user = data;
       console.log(data);
+      console.log("user-page")
       this.cursoService.getCursosByUserId(this.user.idUsuarios).subscribe(curso => {
         this.storage.set("class", curso);
         console.log(curso)
+        console.log("class")
       });
     }).catch().finally(() => {
+      console.log("finally")
       this.saveParams();
 
     })
 
   }
+
   viewReport() {
     console.log(this.centro.idCentro);
     if (this.platform.is('android') || this.platform.is('ios')) {
@@ -65,13 +64,14 @@ export class UserPagePage implements OnInit {
     window.open("http://localhost:8080/api/centro/report/" + this.centro.idCentro, '_system');
 
   }
+
   saveParams() {
     this.centroService.getCentroId(this.user.idCentro).subscribe(centro => {
       console.log(this.user)
 
       this.centro = centro;
       this.storage.set("centro", centro);
-      this.centroService.getReport(this.centro.idCentro);
+      //this.centroService.getReport(this.centro.idCentro);
     });
 
   }

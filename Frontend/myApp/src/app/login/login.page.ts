@@ -25,10 +25,10 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
-      this.isLogged= true;
+      this.isLogged= false;
   
       }else{
-        this.isLogged= false;
+        this.isLogged= true;
   
       }
   }
@@ -48,6 +48,8 @@ export class LoginPage implements OnInit {
       idCentro: null
     };
     this.authService.login(user).subscribe((res)=>{
+      console.log(res)
+      console.log("hola")
       if(!res.token) {
         this.presentAlert("invalid credentials");
         return;

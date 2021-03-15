@@ -44,7 +44,7 @@ export class MapPage implements OnInit {
     private healthExtendService: HealthsExtendService,
     private alertController: AlertController) {
 
-    this.getAllCentros();
+    
   }
 
   ionViewWillEnter() {
@@ -56,7 +56,7 @@ export class MapPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.getAllCentros();
   }
 
   toggleMap1() {
