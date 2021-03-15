@@ -9,6 +9,7 @@ module.exports = app => {
     // Retrieve all Classs
     router.post("/",Class.create);
     router.get("/",Class.findAll);
+    router.delete("/",Class.delete);
    
 
 
