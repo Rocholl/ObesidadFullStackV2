@@ -156,13 +156,16 @@ export class FormHealthPage implements OnInit {
  
   }
   async handleButtonClick() {
+    setTimeout(() => {
+      console.log('Async operation has ended');
+    this.router.navigateByUrl("user-class-students");
+      
+    }, 500);
+
     const alert = await this.alertController.create({
       header: 'Registro creado',
       message: "Registro creado",
-      buttons: [{text: 'Aceptar',handler:()=> {
-        
-        this.router.navigateByUrl("user-class-students");
-      }}]
+   
     });
 
     await alert.present();
